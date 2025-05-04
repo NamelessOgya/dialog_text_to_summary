@@ -1,0 +1,1 @@
+docker run --rm -it --gpus all -v "$(pwd)":/app nvidia/cuda:11.8.0-devel-ubuntu22.04 bash
