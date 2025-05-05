@@ -15,7 +15,7 @@ import tqdm
 from src.data_extractor.gaiyou_formatter import extract_timelines
 
 
-MINIMUM_VIDEO_TIME = 1 * 60 * 45  # 1時間45分以上の動画を対象とする
+minimum_video_time = 1 * 60 * 45  # 1時間45分以上の動画を対象とする
 
 # .env がプロジェクトルートにある想定
 load_dotenv()
@@ -99,7 +99,7 @@ def add_time_to_video_urls_df(video_urls_df: pd.DataFrame) -> pd.DataFrame:
 
     return long_videos_df
 
-def analyze_youtube_ch(channel_id):
+def analyze_youtube_ch(channel_id, minimum_video_time):
     res = get_format_matched_video_urls(API_KEY, channel_id)
 
     df = pd.DataFrame(res)
@@ -110,12 +110,13 @@ def analyze_youtube_ch(channel_id):
     df = add_time_to_video_urls_df(df)
     df.to_csv("./data/tmp_videos_urls_with_time.csv", index=False)
 
-    df = df[df["time"] > MINIMUM_VIDEO_TIME]
+    df = df[df["time"] > minimum_video_time]
     print(f"sample num under time condition...{len(df)}")
     df.to_csv("./data/source_videos.csv", index=False)
 
 if __name__ == '__main__':
     CHANNEL_ID = 'UCGkctuF55veBi7xDGCgcYkw'
-    analyze_youtube_ch(CHANNEL_ID)
+    MINIMUM_VIDEO_TIME = 1 * 60 * 45  # 1時間45分以上の動画を対象とする
+    analyze_youtube_ch(CHANNEL_ID, MINIMUM_VIDEO_TIME)
     
     

@@ -2,6 +2,7 @@ apt update
 apt install -y curl
 
 curl -sSL https://install.python-poetry.org | python3 -
+apt install -y build-essential
 
 
 # パスを通す
