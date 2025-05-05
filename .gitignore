@@ -17,3 +17,6 @@ chokosen-loveti.*
 # Python bytecode
 **/__pycache__/
 *.py[cod]
+
+# trained models
+/qlora-finetuned/*
