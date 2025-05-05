@@ -12,3 +12,8 @@ run.sh
 chokosen-loveti.*
 *.out
 *.csv
+.env
+
+# Python bytecode
+**/__pycache__/
+*.py[cod]
