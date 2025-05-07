@@ -1,25 +1,40 @@
 # regular-expression-using-kagayaki  
-## 誰向け  
-WIP  
-
+　　
 ## 概要  
-GPUを用いて正規表現マッチの高速化をGPUを用いて行う。 
-[Regular Expression Matching Can Be Simple And Fast](https://swtch.com/~rsc/regexp/regexp1.html)の実装をGPUで高速化する。  
-
+youtubeのトランスクリプトを要約に変換するAIを学習するためのrepository
 
 ## 実行準備  
-### 1. コードの修正  
-WIP  
+### 1. .envファイルの準備  
+以下のようにyoutube api名を記載した,`.env`ファイルを作成  
+```
+API_KEY=xxxx
+```
   
-### 2. ビルド済みコンテナの取得  
-repositoryのルートディレクトリから
-```
-.env/kagayaki_sh/make_new_sif_env.sh
-```
-これで./singularity/ubuntu.sifが作成される。  
   
-## cpu版でのテスト実行    
+### 2.環境の取得  
 ```
-compile_and_conduct_test_cpu.sh
+./env/vm_hosting_sh/install_nvidia_toolkit.sh
+./env/vm_hosting_sh/make_new_sif_env.sh
+```  
+  
+### 3.コンテナの起動  
 ```
-実行完了すると```./results/```に実行結果がcsv排出される。
+./env/vm_hosting_sh/start_container.sh
+```  
+  
+### 4.コンテナ無いで必要ファイルのinstall  
+```
+./env/vm_hosting_sh/additional_installs.sh 
+source ~/.bashrc
+```  
+  
+### 5.実行  
+youtubeの動画を取得する。  
+```
+poetry run python -m run.fetch_and_preprocess
+```  
+  
+モデルの学習を実施  
+```
+poetry run python -m run.finetune.py
+```

@@ -1,6 +1,6 @@
 """
     # QLoRA Fine-tuning Example
-    poetry run python -m src.sandbox.finetune
+    poetry run python -m run.finetune
 """
 
 import os
@@ -25,7 +25,7 @@ micro_batch_size = 1
 gradient_accumulation_steps = batch_size // micro_batch_size
 max_length = 512
 learning_rate = 2e-4
-num_train_epochs = 100
+num_train_epochs = 3
 seed = 42
 
 # 2. データロード & 分割
