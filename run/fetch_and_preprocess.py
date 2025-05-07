@@ -9,6 +9,7 @@ import tqdm
 from src.data_extractor.gaiyou_formatter import generate_formatted_text
 from src.data_extractor.youtube_extractor import extract_info
 from src.data_extractor.analyze_youtube_ch import analyze_youtube_ch
+from src.data_extractor.split_data import assign_split
 
 
 CHANNEL_ID = 'UCGkctuF55veBi7xDGCgcYkw'
@@ -16,7 +17,11 @@ MINIMUM_VIDEO_TIME = 1 * 60 * 45  # 1時間45分以上の動画を対象とす�
 
 SKIP_CHANNEL_ANALYSIS = True
 SKIP_DISCRIPTION_TRANSCRIPT_FETCH = True
-SKIP_DATA_PREPROCESS = True
+SKIP_DATA_PREPROCESS = False
+
+TRAIN_RATIO = 0.8
+VAL_RATIO = 0.1
+TEST_RATIO = 1 - TRAIN_RATIO - VAL_RATIO
 
 if __name__ == "__main__":
 
@@ -51,6 +56,7 @@ if __name__ == "__main__":
         res = pd.read_csv("./data/extracted_data.csv")
 
         res["target"] = res["description"].apply(lambda x: generate_formatted_text(x))
+        res["split"] = res["video_id"].apply(assign_split)
 
         print(f"target is null...{res['target'].isna().sum()}")
 
