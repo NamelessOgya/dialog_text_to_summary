@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 set -e
 
 # もし同名コンテナが残っていれば消す
@@ -11,6 +11,9 @@ docker run -d \
   -v "$(pwd):/app" \
   -w "/app" \
   --restart unless-stopped \
-  pytorch/pytorch \
-  bash -c "./env/vm_hosting_sh/additional_installs.sh && source ~/.bashrc && poetry run python run -m ./run/finetune.py" #実行コマンドに応じて変更
-
+  --entrypoint /bin/bash \
+  my-pytorch-poetry \
+  bash -l -c "\
+  poetry install --no-root && \
+  poetry run python ./run/finetune.py \
+"

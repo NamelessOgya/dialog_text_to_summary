@@ -17,18 +17,19 @@ API_KEY=xxxx
 ./env/vm_hosting_sh/make_new_sif_env.sh
 ```  
   
-### 3.コンテナの起動  
+## コンテナでのinteractive実行  
+### 1.コンテナの起動  
 ```
 ./env/vm_hosting_sh/start_container.sh
 ```  
   
-### 4.コンテナ無いで必要ファイルのinstall  
+### 2.コンテナ無いで必要ファイルのinstall  
 ```
 ./env/vm_hosting_sh/additional_installs.sh 
 source ~/.bashrc
 ```  
   
-### 5.実行  
+### 3.実行  
 youtubeの動画を取得する。  
 ```
 poetry run python -m run.fetch_and_preprocess
@@ -37,4 +38,19 @@ poetry run python -m run.fetch_and_preprocess
 モデルの学習を実施  
 ```
 poetry run python -m run.finetune.py
+```
+
+## バッチ実行  
+```
+./env/vm_hosting_sh/batch_excute.sh
+```  
+  
+ログの確認は以下  
+```
+docker logs dialog_text_to_summary
+```  
+  
+停止  
+```
+docker stop dialog_text_to_summary
 ```
