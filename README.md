@@ -1,7 +1,26 @@
 # regular-expression-using-kagayaki  
 　　
 ## 概要  
-youtubeのトランスクリプトを要約に変換するAIを学習するためのrepository
+youtubeのトランスクリプトを要約に変換するAIを学習するためのrepository  
+  
+## 学習データ  
+youtubeチャンネルから概要欄に以下のようなタイムラインフォーマットを含む動画をリストを選定  
+```
+00:00 xxx
+00:21 yyy
+```  
+  
+これを以下のような学習データに変更する。  
+  
+input:  動画のトランスクリプト  
+output: 以下のフォーマットのタイムライン  
+```
+- xxx
+- yyy
+```  
+  
+※ 動画内における時間はトランスクリプトから知りようがないので、項目のみ列挙する形にする。  
+  
 
 ## 実行準備  
 ### 1. .envファイルの準備  
@@ -17,19 +36,18 @@ API_KEY=xxxx
 ./env/vm_hosting_sh/make_new_sif_env.sh
 ```  
   
-## コンテナでのinteractive実行  
-### 1.コンテナの起動  
+### 3.コンテナの起動  
 ```
 ./env/vm_hosting_sh/start_container.sh
 ```  
   
-### 2.コンテナ無いで必要ファイルのinstall  
+### 4.コンテナ無いで必要ファイルのinstall  
 ```
 ./env/vm_hosting_sh/additional_installs.sh 
 source ~/.bashrc
 ```  
   
-### 3.実行  
+### 5.実行  
 youtubeの動画を取得する。  
 ```
 poetry run python -m run.fetch_and_preprocess
@@ -38,19 +56,4 @@ poetry run python -m run.fetch_and_preprocess
 モデルの学習を実施  
 ```
 poetry run python -m run.finetune.py
-```
-
-## バッチ実行  
-```
-./env/vm_hosting_sh/batch_excute.sh
-```  
-  
-ログの確認は以下  
-```
-docker logs dialog_text_to_summary
-```  
-  
-停止  
-```
-docker stop dialog_text_to_summary
 ```
