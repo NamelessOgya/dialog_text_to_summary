@@ -11,7 +11,7 @@ docker run -d \
   -v "$(pwd):/app" \
   -w "/app" \
   --restart unless-stopped \
-  pytorch/pytorch \
+  my-pytorch-poetry:latest \
   tail -f /dev/null
 
 exec docker exec -it dialog_text_to_summary bash

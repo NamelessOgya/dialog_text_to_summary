@@ -15,8 +15,8 @@ from src.data_extractor.split_data import assign_split
 CHANNEL_ID = 'UCGkctuF55veBi7xDGCgcYkw'
 MINIMUM_VIDEO_TIME = 1 * 60 * 45  # 1時間45分以上の動画を対象とする
 
-SKIP_CHANNEL_ANALYSIS = True
-SKIP_DISCRIPTION_TRANSCRIPT_FETCH = True
+SKIP_CHANNEL_ANALYSIS = False
+SKIP_DISCRIPTION_TRANSCRIPT_FETCH = False
 SKIP_DATA_PREPROCESS = False
 
 TRAIN_RATIO = 0.8

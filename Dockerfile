@@ -1,23 +1,18 @@
-# 1. ベースイメージ
+# syntax=docker/dockerfile:1.5
 FROM pytorch/pytorch:latest
 
-# 2. apt の更新＆必要パッケージのインストール
+ARG  POETRY_VERSION=2.0.1
+ENV  POETRY_HOME="/opt/poetry" \
+     POETRY_VIRTUALENVS_CREATE="false" \
+     POETRY_NO_INTERACTION="1" \
+     PATH="$POETRY_HOME/bin:${PATH}"
+
 RUN apt-get update \
- && apt-get install -y --no-install-recommends \
-        curl \
-        build-essential \
- && rm -rf /var/lib/apt/lists/*
+ && apt-get install -y --no-install-recommends curl \
+ # ---- Poetry インストール ----
+ && curl -sSL https://install.python-poetry.org | POETRY_VERSION=${POETRY_VERSION} python3 - \
+ && ln -s $POETRY_HOME/bin/poetry /usr/local/bin/poetry \
+ && poetry --version        # ← ここでバージョンが表示されれば OK
 
-# 3. Poetry インストール
-RUN curl -sSL https://install.python-poetry.org | python3 - \
- && mv ~/.local/bin/poetry /usr/local/bin/poetry
-
-# 4. 作業ディレクトリ設定
 WORKDIR /app
-
-# （必要ならソースコードをコピーして、poetry install もここで実行できます）
-# COPY pyproject.toml poetry.lock ./
-# RUN poetry install --no-dev
-
-# デフォルトのコマンド／エントリーポイントを指定
-ENTRYPOINT ["bash"]
+CMD ["bash"]                # 元イメージと同じ振る舞いを継承
