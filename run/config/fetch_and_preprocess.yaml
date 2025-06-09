@@ -1,0 +1,24 @@
+defaults:
+  - common   # ← 上から順にマージ
+  - fetch_and_preprocess
+  - _self_   # これより下に自分自身のキーを書くなら残す
+
+CHANNEL_ID: 'UCGkctuF55veBi7xDGCgcYkw'
+MINIMUM_VIDEO_TIME: 2700 # 45min以上のデータを対象に。1 * 60 * 45
+
+# train / test / validの分割比。合計が1になるように。
+TRAIN_RATIO: 0.8
+VAL_RATIO: 0.1
+TEST_RATIO: 0.1
+
+MODE:
+  - SKIP_CHANNEL_ANALYSIS: False
+  - SKIP_DISCRIPTION_TRANSCRIPT_FETCH: False
+  - SKIP_DATA_PREPROCESS: False
+
+# ディレクトリやファイル名
+SOURCE_CSV_PATH: ${common.DATA_DIR}/source_videos.csv
+EXTRACTED_DATA_PATH: ${common.DATA_DIR}/extracted_data.csv
+PREPROCESSED_DATA_PATH: ${common.DATA_DIR}/preprocessed_data.csv
+
+

@@ -1,0 +1,15 @@
+defaults:
+  - common   # ← 上から順にマージ
+  - fetch_and_preprocess
+  - _self_   # これより下に自分自身のキーを書くなら残す
+
+
+MODEL_NAME: rinna/gemma-2-baku-2b-it
+PROCESSED_DATA_PATH: ${common.DATA_DIR}/processed_data.csv
+# TRAINED_MODEL_DIRはpython内で計算して、${common.TRAINED_MODEL_DIR}/${MODEL_NAME}に保存する。
+# MODEL_NAME自体に"/"が含まれるので、除く処理を入れたいため。  
+
+SEED: 42
+MAX_LENGTH: 512
+BATCH_SIZE: 4
+MICRO_BATCH: 1

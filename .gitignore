@@ -1,0 +1,22 @@
+__pycache__/*
+.ipynb_checkpoints/*
+callback/*
+singularity/tmp/*
+log/*
+.local/*
+src/__pycache__/*
+
+config.ini
+*.sif
+run.sh
+chokosen-loveti.*
+*.out
+*.csv
+.env
+
+# Python bytecode
+**/__pycache__/
+*.py[cod]
+
+# trained models
+/qlora-finetuned/*
